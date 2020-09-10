@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>uci_informe_web.utf8</title>
+
+<script src="site_libs/header-attrs-2.2.3/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img id="logo" style="width: 90px;" src="fund_logo.jpg" /></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    UCI: Descripción
+  </a>
+</li>
+<li>
+  <a href="web_datos.html">
+    <span class="fa fa-database"></span>
+     
+    Datos
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-chart-line"></span>
+     
+    Graficos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="web_ultimo.dato.html">Último dato</a>
+    </li>
+    <li>
+      <a href="web_st.html">Serie Histórica</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/faf-bna/UCI">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<blockquote>
+<p>JULIO-2020</p>
+</blockquote>
+<p>En julio-2020 la utilización de la capacidad instalada creció 6.9 puntos porcentuales (p.p.) hasta 53.3 desde 46.4 el mes anterior</p>
+<p><div id="htmlwidget-616a2030ee774dec3be9" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-616a2030ee774dec3be9">{"x":{"data":[{"x":[16801,16832,16861,16892,16922,16953,16983,17014,17045,17075,17106,17136,17167,17198,17226,17257,17287,17318,17348,17379,17410,17440,17471,17501,17532,17563,17591,17622,17652,17683,17713,17744,17775,17805,17836,17866,17897,17928,17956,17987,18017,18048,18078,18109,18140,18170,18201,18231,18262,18293,18322,18353,18383,18414],"y":[62.9,64.2,64.8,64.8,65,64.9,62,63.6,63.9,65.4,68.4,63.6,60.6,60,65.7,64.5,65.8,67.1,65.1,67.3,66.3,68.3,69.2,64,61.6,64.4,66.8,67.6,65.1,61.8,60.1,63,61.1,64.8,63.3,56.6,56.2,58.5,58.8,61.6,62,59.1,58.7,60.5,57.7,62.1,60.7,56.9,56.1,59.4,51.6,42,46.4,53.3],"text":["periodo: 2016-01-01<br />uci: 62.9","periodo: 2016-02-01<br />uci: 64.2","periodo: 2016-03-01<br />uci: 64.8","periodo: 2016-04-01<br />uci: 64.8","periodo: 2016-05-01<br />uci: 65.0","periodo: 2016-06-01<br />uci: 64.9","periodo: 2016-07-01<br />uci: 62.0","periodo: 2016-08-01<br />uci: 63.6","periodo: 2016-09-01<br />uci: 63.9","periodo: 2016-10-01<br />uci: 65.4","periodo: 2016-11-01<br />uci: 68.4","periodo: 2016-12-01<br />uci: 63.6","periodo: 2017-01-01<br />uci: 60.6","periodo: 2017-02-01<br />uci: 60.0","periodo: 2017-03-01<br />uci: 65.7","periodo: 2017-04-01<br />uci: 64.5","periodo: 2017-05-01<br />uci: 65.8","periodo: 2017-06-01<br />uci: 67.1","periodo: 2017-07-01<br />uci: 65.1","periodo: 2017-08-01<br />uci: 67.3","periodo: 2017-09-01<br />uci: 66.3","periodo: 2017-10-01<br />uci: 68.3","periodo: 2017-11-01<br />uci: 69.2","periodo: 2017-12-01<br />uci: 64.0","periodo: 2018-01-01<br />uci: 61.6","periodo: 2018-02-01<br />uci: 64.4","periodo: 2018-03-01<br />uci: 66.8","periodo: 2018-04-01<br />uci: 67.6","periodo: 2018-05-01<br />uci: 65.1","periodo: 2018-06-01<br />uci: 61.8","periodo: 2018-07-01<br />uci: 60.1","periodo: 2018-08-01<br />uci: 63.0","periodo: 2018-09-01<br />uci: 61.1","periodo: 2018-10-01<br />uci: 64.8","periodo: 2018-11-01<br />uci: 63.3","periodo: 2018-12-01<br />uci: 56.6","periodo: 2019-01-01<br />uci: 56.2","periodo: 2019-02-01<br />uci: 58.5","periodo: 2019-03-01<br />uci: 58.8","periodo: 2019-04-01<br />uci: 61.6","periodo: 2019-05-01<br />uci: 62.0","periodo: 2019-06-01<br />uci: 59.1","periodo: 2019-07-01<br />uci: 58.7","periodo: 2019-08-01<br />uci: 60.5","periodo: 2019-09-01<br />uci: 57.7","periodo: 2019-10-01<br />uci: 62.1","periodo: 2019-11-01<br />uci: 60.7","periodo: 2019-12-01<br />uci: 56.9","periodo: 2020-01-01<br />uci: 56.1","periodo: 2020-02-01<br />uci: 59.4","periodo: 2020-03-01<br />uci: 51.6","periodo: 2020-04-01<br />uci: 42.0","periodo: 2020-05-01<br />uci: 46.4","periodo: 2020-06-01<br />uci: 53.3"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(1,162,217,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(1,162,217,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(1,162,217,1)"}},"frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":63.5616438356165,"l":37.2602739726027},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"UCI: Evolución Nivel General (%)","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[16720.35,18494.65],"tickmode":"array","ticktext":[null,"ene 16","abr 16","jul 16","oct 16","ene 17","abr 17","jul 17","oct 17","ene 18","abr 18","jul 18","oct 18","ene 19","abr 19","jul 19","oct 19","ene 20","abr 20","jul 20",null],"tickvals":[null,16801,16892,16983,17075,17167,17257,17348,17440,17532,17622,17713,17805,17897,17987,18078,18170,18262,18353,18444,null],"categoryorder":"array","categoryarray":[null,"ene 16","abr 16","jul 16","oct 16","ene 17","abr 17","jul 17","oct 17","ene 18","abr 18","jul 18","oct 18","ene 19","abr 19","jul 19","oct 19","ene 20","abr 20","jul 20",null],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-90,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Mes","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[40.64,70.56],"tickmode":"array","ticktext":["NA","50","60","70"],"tickvals":[null,50,60,70],"categoryorder":"array","categoryarray":["NA","50","60","70"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Utilización de Capacidad Instalada (%)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"23c1a62928bf1":{"x":{},"y":{},"type":"scatter"},"23c1a34a91551":{"x":{},"y":{}}},"cur_data":"23c1a62928bf1","visdat":{"23c1a62928bf1":["function (y) ","x"],"23c1a34a91551":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script> <em>Fuente: INDEC</em></p>
+<p><div id="htmlwidget-1b0ae76904d37625d113" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1b0ae76904d37625d113">{"x":{"data":[{"orientation":"h","width":[0.9,0.899999999999999,0.899999999999999,0.9,0.899999999999999,0.9,0.899999999999999,0.899999999999999,0.9,0.899999999999999,0.9,0.9,0.9],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[53.3,60.1,97.1,37.8,68.1,52.5,67.3,59.8,46.6,61.8,48.4,23,43.1],"y":[7,9,13,2,12,6,11,8,4,10,5,1,3],"text":["sector: Nivel general<br />uci: 53.3","sector: Productos alimenticios y bebidas<br />uci: 60.1","sector: Productos del tabaco<br />uci: 97.1","sector: Productos textiles<br />uci: 37.8","sector: Papel y cartón<br />uci: 68.1","sector: Edición e impresión<br />uci: 52.5","sector: Refinación del petróleo<br />uci: 67.3","sector: Sustancias y productos químicos<br />uci: 59.8","sector: Productos de caucho y plástico<br />uci: 46.6","sector: Productos minerales no metálicos<br />uci: 61.8","sector: Industrias metálicas básicas<br />uci: 48.4","sector: Industria automotriz<br />uci: 23.0","sector: Metalmecánica excluida industria automotriz<br />uci: 43.1"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(1,162,217,0.5)","line":{"width":1.88976377952756,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[46.4,57,62.2,17.8,65,54.3,57,63,36.4,38.5,39,6.2,31.7],"y":[7,9,13,2,12,6,11,8,4,10,5,1,3],"text":["sector: Nivel general<br />uci: 46.4","sector: Productos alimenticios y bebidas<br />uci: 57.0","sector: Productos del tabaco<br />uci: 62.2","sector: Productos textiles<br />uci: 17.8","sector: Papel y cartón<br />uci: 65.0","sector: Edición e impresión<br />uci: 54.3","sector: Refinación del petróleo<br />uci: 57.0","sector: Sustancias y productos químicos<br />uci: 63.0","sector: Productos de caucho y plástico<br />uci: 36.4","sector: Productos minerales no metálicos<br />uci: 38.5","sector: Industrias metálicas básicas<br />uci: 39.0","sector: Industria automotriz<br />uci:  6.2","sector: Metalmecánica excluida industria automotriz<br />uci: 31.7"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(1,77,100,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(1,77,100,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":262.283105022831},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"UCI: últimos dos meses por sectores (%)","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-4.855,101.955],"tickmode":"array","ticktext":["0","25","50","75","100"],"tickvals":[0,25,50,75,100],"categoryorder":"array","categoryarray":["0","25","50","75","100"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Utilización de Capacidad Instalada (%)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,13.6],"tickmode":"array","ticktext":["Industria automotriz","Productos textiles","Metalmecánica excluida industria automotriz","Productos de caucho y plástico","Industrias metálicas básicas","Edición e impresión","Nivel general","Sustancias y productos químicos","Productos alimenticios y bebidas","Productos minerales no metálicos","Refinación del petróleo","Papel y cartón","Productos del tabaco"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13],"categoryorder":"array","categoryarray":["Industria automotriz","Productos textiles","Metalmecánica excluida industria automotriz","Productos de caucho y plástico","Industrias metálicas básicas","Edición e impresión","Nivel general","Sustancias y productos químicos","Productos alimenticios y bebidas","Productos minerales no metálicos","Refinación del petróleo","Papel y cartón","Productos del tabaco"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"23c1a2ba945e2":{"x":{},"y":{},"type":"bar"},"23c1a4c6a0bae":{"x":{},"y":{}}},"cur_data":"23c1a2ba945e2","visdat":{"23c1a2ba945e2":["function (y) ","x"],"23c1a4c6a0bae":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script> <em>Fuente: INDEC</em></p>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

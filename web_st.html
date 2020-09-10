@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Utilizacion de la Capacidad Instalada por sector (%): Series Históricas</title>
+
+<script src="site_libs/header-attrs-2.2.3/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img id="logo" style="width: 90px;" src="fund_logo.jpg" /></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    UCI: Descripción
+  </a>
+</li>
+<li>
+  <a href="web_datos.html">
+    <span class="fa fa-database"></span>
+     
+    Datos
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-chart-line"></span>
+     
+    Graficos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="web_ultimo.dato.html">Último dato</a>
+    </li>
+    <li>
+      <a href="web_st.html">Serie Histórica</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/faf-bna/UCI">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Utilizacion de la Capacidad Instalada por sector (%): Series Históricas</h1>
+
+</div>
+
+
+<p>Al hacer doble click en el sector deseado, se puede aislar la serie.</p>
+<div id="htmlwidget-3d6452e4656ef95bd093" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3d6452e4656ef95bd093">{"x":{"visdat":{"23c1a7c44ee8f":["function () ","plotlyVisDat"]},"cur_data":"23c1a7c44ee8f","attrs":{"23c1a7c44ee8f":{"x":{},"y":{},"mode":"lines","text":{},"name":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"legend":{"font":{"family":"sans-serif","size":8},"orientation":"h","x":-0.05,"y":1},"xaxis":{"domain":[0,1],"automargin":true,"title":"periodo"},"yaxis":{"domain":[0,1],"automargin":true,"title":"uci"},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[62.9,64.2,64.8,64.8,65,64.9,62,63.6,63.9,65.4,68.4,63.6,60.6,60,65.7,64.5,65.8,67.1,65.1,67.3,66.3,68.3,69.2,64,61.6,64.4,66.8,67.6,65.1,61.8,60.1,63,61.1,64.8,63.3,56.6,56.2,58.5,58.8,61.6,62,59.1,58.7,60.5,57.7,62.1,60.7,56.9,56.1,59.4,51.6,42,46.4,53.3],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 62.9 <br>Sector: Nivel general","Mes:  2016-02-01 <br>UCI: 64.2 <br>Sector: Nivel general","Mes:  2016-03-01 <br>UCI: 64.8 <br>Sector: Nivel general","Mes:  2016-04-01 <br>UCI: 64.8 <br>Sector: Nivel general","Mes:  2016-05-01 <br>UCI: 65 <br>Sector: Nivel general","Mes:  2016-06-01 <br>UCI: 64.9 <br>Sector: Nivel general","Mes:  2016-07-01 <br>UCI: 62 <br>Sector: Nivel general","Mes:  2016-08-01 <br>UCI: 63.6 <br>Sector: Nivel general","Mes:  2016-09-01 <br>UCI: 63.9 <br>Sector: Nivel general","Mes:  2016-10-01 <br>UCI: 65.4 <br>Sector: Nivel general","Mes:  2016-11-01 <br>UCI: 68.4 <br>Sector: Nivel general","Mes:  2016-12-01 <br>UCI: 63.6 <br>Sector: Nivel general","Mes:  2017-01-01 <br>UCI: 60.6 <br>Sector: Nivel general","Mes:  2017-02-01 <br>UCI: 60 <br>Sector: Nivel general","Mes:  2017-03-01 <br>UCI: 65.7 <br>Sector: Nivel general","Mes:  2017-04-01 <br>UCI: 64.5 <br>Sector: Nivel general","Mes:  2017-05-01 <br>UCI: 65.8 <br>Sector: Nivel general","Mes:  2017-06-01 <br>UCI: 67.1 <br>Sector: Nivel general","Mes:  2017-07-01 <br>UCI: 65.1 <br>Sector: Nivel general","Mes:  2017-08-01 <br>UCI: 67.3 <br>Sector: Nivel general","Mes:  2017-09-01 <br>UCI: 66.3 <br>Sector: Nivel general","Mes:  2017-10-01 <br>UCI: 68.3 <br>Sector: Nivel general","Mes:  2017-11-01 <br>UCI: 69.2 <br>Sector: Nivel general","Mes:  2017-12-01 <br>UCI: 64 <br>Sector: Nivel general","Mes:  2018-01-01 <br>UCI: 61.6 <br>Sector: Nivel general","Mes:  2018-02-01 <br>UCI: 64.4 <br>Sector: Nivel general","Mes:  2018-03-01 <br>UCI: 66.8 <br>Sector: Nivel general","Mes:  2018-04-01 <br>UCI: 67.6 <br>Sector: Nivel general","Mes:  2018-05-01 <br>UCI: 65.1 <br>Sector: Nivel general","Mes:  2018-06-01 <br>UCI: 61.8 <br>Sector: Nivel general","Mes:  2018-07-01 <br>UCI: 60.1 <br>Sector: Nivel general","Mes:  2018-08-01 <br>UCI: 63 <br>Sector: Nivel general","Mes:  2018-09-01 <br>UCI: 61.1 <br>Sector: Nivel general","Mes:  2018-10-01 <br>UCI: 64.8 <br>Sector: Nivel general","Mes:  2018-11-01 <br>UCI: 63.3 <br>Sector: Nivel general","Mes:  2018-12-01 <br>UCI: 56.6 <br>Sector: Nivel general","Mes:  2019-01-01 <br>UCI: 56.2 <br>Sector: Nivel general","Mes:  2019-02-01 <br>UCI: 58.5 <br>Sector: Nivel general","Mes:  2019-03-01 <br>UCI: 58.8 <br>Sector: Nivel general","Mes:  2019-04-01 <br>UCI: 61.6 <br>Sector: Nivel general","Mes:  2019-05-01 <br>UCI: 62 <br>Sector: Nivel general","Mes:  2019-06-01 <br>UCI: 59.1 <br>Sector: Nivel general","Mes:  2019-07-01 <br>UCI: 58.7 <br>Sector: Nivel general","Mes:  2019-08-01 <br>UCI: 60.5 <br>Sector: Nivel general","Mes:  2019-09-01 <br>UCI: 57.7 <br>Sector: Nivel general","Mes:  2019-10-01 <br>UCI: 62.1 <br>Sector: Nivel general","Mes:  2019-11-01 <br>UCI: 60.7 <br>Sector: Nivel general","Mes:  2019-12-01 <br>UCI: 56.9 <br>Sector: Nivel general","Mes:  2020-01-01 <br>UCI: 56.1 <br>Sector: Nivel general","Mes:  2020-02-01 <br>UCI: 59.4 <br>Sector: Nivel general","Mes:  2020-03-01 <br>UCI: 51.6 <br>Sector: Nivel general","Mes:  2020-04-01 <br>UCI: 42 <br>Sector: Nivel general","Mes:  2020-05-01 <br>UCI: 46.4 <br>Sector: Nivel general","Mes:  2020-06-01 <br>UCI: 53.3 <br>Sector: Nivel general"],"name":"A","type":"scatter","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"line":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[68.5,66.8,67.2,63.5,64.5,62.7,61.7,68.4,65.7,65.7,69,66.9,65.1,62.4,70.2,64.3,65,64.3,63.9,65.9,63.8,66.3,67.7,61.2,62.7,61.4,63.3,65,61.5,59.1,58.9,61.7,59.4,66.6,63.5,58.9,57.5,57.6,55.7,60.7,60.5,59.8,63.9,63.3,61.6,64.4,59.7,63.3,58.6,60.2,55.6,59.7,57,60.1],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 68.5 <br>Sector: Productos alimenticios y bebidas","Mes:  2016-02-01 <br>UCI: 66.8 <br>Sector: Productos alimenticios y bebidas","Mes:  2016-03-01 <br>UCI: 67.2 <br>Sector: Productos alimenticios y bebidas","Mes:  2016-04-01 <br>UCI: 63.5 <br>Sector: Productos alimenticios y bebidas","Mes:  2016-05-01 <br>UCI: 64.5 <br>Sector: Productos alimenticios y bebidas","Mes:  2016-06-01 <br>UCI: 62.7 <br>Sector: Productos alimenticios y bebidas","Mes:  2016-07-01 <br>UCI: 61.7 <br>Sector: Productos alimenticios y bebidas","Mes:  2016-08-01 <br>UCI: 68.4 <br>Sector: Productos alimenticios y bebidas","Mes:  2016-09-01 <br>UCI: 65.7 <br>Sector: Productos alimenticios y bebidas","Mes:  2016-10-01 <br>UCI: 65.7 <br>Sector: Productos alimenticios y bebidas","Mes:  2016-11-01 <br>UCI: 69 <br>Sector: Productos alimenticios y bebidas","Mes:  2016-12-01 <br>UCI: 66.9 <br>Sector: Productos alimenticios y bebidas","Mes:  2017-01-01 <br>UCI: 65.1 <br>Sector: Productos alimenticios y bebidas","Mes:  2017-02-01 <br>UCI: 62.4 <br>Sector: Productos alimenticios y bebidas","Mes:  2017-03-01 <br>UCI: 70.2 <br>Sector: Productos alimenticios y bebidas","Mes:  2017-04-01 <br>UCI: 64.3 <br>Sector: Productos alimenticios y bebidas","Mes:  2017-05-01 <br>UCI: 65 <br>Sector: Productos alimenticios y bebidas","Mes:  2017-06-01 <br>UCI: 64.3 <br>Sector: Productos alimenticios y bebidas","Mes:  2017-07-01 <br>UCI: 63.9 <br>Sector: Productos alimenticios y bebidas","Mes:  2017-08-01 <br>UCI: 65.9 <br>Sector: Productos alimenticios y bebidas","Mes:  2017-09-01 <br>UCI: 63.8 <br>Sector: Productos alimenticios y bebidas","Mes:  2017-10-01 <br>UCI: 66.3 <br>Sector: Productos alimenticios y bebidas","Mes:  2017-11-01 <br>UCI: 67.7 <br>Sector: Productos alimenticios y bebidas","Mes:  2017-12-01 <br>UCI: 61.2 <br>Sector: Productos alimenticios y bebidas","Mes:  2018-01-01 <br>UCI: 62.7 <br>Sector: Productos alimenticios y bebidas","Mes:  2018-02-01 <br>UCI: 61.4 <br>Sector: Productos alimenticios y bebidas","Mes:  2018-03-01 <br>UCI: 63.3 <br>Sector: Productos alimenticios y bebidas","Mes:  2018-04-01 <br>UCI: 65 <br>Sector: Productos alimenticios y bebidas","Mes:  2018-05-01 <br>UCI: 61.5 <br>Sector: Productos alimenticios y bebidas","Mes:  2018-06-01 <br>UCI: 59.1 <br>Sector: Productos alimenticios y bebidas","Mes:  2018-07-01 <br>UCI: 58.9 <br>Sector: Productos alimenticios y bebidas","Mes:  2018-08-01 <br>UCI: 61.7 <br>Sector: Productos alimenticios y bebidas","Mes:  2018-09-01 <br>UCI: 59.4 <br>Sector: Productos alimenticios y bebidas","Mes:  2018-10-01 <br>UCI: 66.6 <br>Sector: Productos alimenticios y bebidas","Mes:  2018-11-01 <br>UCI: 63.5 <br>Sector: Productos alimenticios y bebidas","Mes:  2018-12-01 <br>UCI: 58.9 <br>Sector: Productos alimenticios y bebidas","Mes:  2019-01-01 <br>UCI: 57.5 <br>Sector: Productos alimenticios y bebidas","Mes:  2019-02-01 <br>UCI: 57.6 <br>Sector: Productos alimenticios y bebidas","Mes:  2019-03-01 <br>UCI: 55.7 <br>Sector: Productos alimenticios y bebidas","Mes:  2019-04-01 <br>UCI: 60.7 <br>Sector: Productos alimenticios y bebidas","Mes:  2019-05-01 <br>UCI: 60.5 <br>Sector: Productos alimenticios y bebidas","Mes:  2019-06-01 <br>UCI: 59.8 <br>Sector: Productos alimenticios y bebidas","Mes:  2019-07-01 <br>UCI: 63.9 <br>Sector: Productos alimenticios y bebidas","Mes:  2019-08-01 <br>UCI: 63.3 <br>Sector: Productos alimenticios y bebidas","Mes:  2019-09-01 <br>UCI: 61.6 <br>Sector: Productos alimenticios y bebidas","Mes:  2019-10-01 <br>UCI: 64.4 <br>Sector: Productos alimenticios y bebidas","Mes:  2019-11-01 <br>UCI: 59.7 <br>Sector: Productos alimenticios y bebidas","Mes:  2019-12-01 <br>UCI: 63.3 <br>Sector: Productos alimenticios y bebidas","Mes:  2020-01-01 <br>UCI: 58.6 <br>Sector: Productos alimenticios y bebidas","Mes:  2020-02-01 <br>UCI: 60.2 <br>Sector: Productos alimenticios y bebidas","Mes:  2020-03-01 <br>UCI: 55.6 <br>Sector: Productos alimenticios y bebidas","Mes:  2020-04-01 <br>UCI: 59.7 <br>Sector: Productos alimenticios y bebidas","Mes:  2020-05-01 <br>UCI: 57 <br>Sector: Productos alimenticios y bebidas","Mes:  2020-06-01 <br>UCI: 60.1 <br>Sector: Productos alimenticios y bebidas"],"name":"B","type":"scatter","marker":{"color":"rgba(204,167,126,1)","line":{"color":"rgba(204,167,126,1)"}},"textfont":{"color":"rgba(204,167,126,1)"},"error_y":{"color":"rgba(204,167,126,1)"},"error_x":{"color":"rgba(204,167,126,1)"},"line":{"color":"rgba(204,167,126,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[83.9,81.3,84.1,81.4,79,69.1,72.8,73.4,80.8,57,73.3,75.5,80.3,78.3,76,62.4,71.7,76.1,83.1,77,77.3,71.6,70.5,61.8,77.8,71.5,74.4,69.2,79.5,68,73,76.7,66.5,71.4,74.6,56,83.9,72.9,63.8,58.6,70.8,54.6,68.9,64.6,69.2,73.1,69.7,50.1,67.3,58.2,53.6,0,62.2,97.1],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 83.9 <br>Sector: Productos del tabaco","Mes:  2016-02-01 <br>UCI: 81.3 <br>Sector: Productos del tabaco","Mes:  2016-03-01 <br>UCI: 84.1 <br>Sector: Productos del tabaco","Mes:  2016-04-01 <br>UCI: 81.4 <br>Sector: Productos del tabaco","Mes:  2016-05-01 <br>UCI: 79 <br>Sector: Productos del tabaco","Mes:  2016-06-01 <br>UCI: 69.1 <br>Sector: Productos del tabaco","Mes:  2016-07-01 <br>UCI: 72.8 <br>Sector: Productos del tabaco","Mes:  2016-08-01 <br>UCI: 73.4 <br>Sector: Productos del tabaco","Mes:  2016-09-01 <br>UCI: 80.8 <br>Sector: Productos del tabaco","Mes:  2016-10-01 <br>UCI: 57 <br>Sector: Productos del tabaco","Mes:  2016-11-01 <br>UCI: 73.3 <br>Sector: Productos del tabaco","Mes:  2016-12-01 <br>UCI: 75.5 <br>Sector: Productos del tabaco","Mes:  2017-01-01 <br>UCI: 80.3 <br>Sector: Productos del tabaco","Mes:  2017-02-01 <br>UCI: 78.3 <br>Sector: Productos del tabaco","Mes:  2017-03-01 <br>UCI: 76 <br>Sector: Productos del tabaco","Mes:  2017-04-01 <br>UCI: 62.4 <br>Sector: Productos del tabaco","Mes:  2017-05-01 <br>UCI: 71.7 <br>Sector: Productos del tabaco","Mes:  2017-06-01 <br>UCI: 76.1 <br>Sector: Productos del tabaco","Mes:  2017-07-01 <br>UCI: 83.1 <br>Sector: Productos del tabaco","Mes:  2017-08-01 <br>UCI: 77 <br>Sector: Productos del tabaco","Mes:  2017-09-01 <br>UCI: 77.3 <br>Sector: Productos del tabaco","Mes:  2017-10-01 <br>UCI: 71.6 <br>Sector: Productos del tabaco","Mes:  2017-11-01 <br>UCI: 70.5 <br>Sector: Productos del tabaco","Mes:  2017-12-01 <br>UCI: 61.8 <br>Sector: Productos del tabaco","Mes:  2018-01-01 <br>UCI: 77.8 <br>Sector: Productos del tabaco","Mes:  2018-02-01 <br>UCI: 71.5 <br>Sector: Productos del tabaco","Mes:  2018-03-01 <br>UCI: 74.4 <br>Sector: Productos del tabaco","Mes:  2018-04-01 <br>UCI: 69.2 <br>Sector: Productos del tabaco","Mes:  2018-05-01 <br>UCI: 79.5 <br>Sector: Productos del tabaco","Mes:  2018-06-01 <br>UCI: 68 <br>Sector: Productos del tabaco","Mes:  2018-07-01 <br>UCI: 73 <br>Sector: Productos del tabaco","Mes:  2018-08-01 <br>UCI: 76.7 <br>Sector: Productos del tabaco","Mes:  2018-09-01 <br>UCI: 66.5 <br>Sector: Productos del tabaco","Mes:  2018-10-01 <br>UCI: 71.4 <br>Sector: Productos del tabaco","Mes:  2018-11-01 <br>UCI: 74.6 <br>Sector: Productos del tabaco","Mes:  2018-12-01 <br>UCI: 56 <br>Sector: Productos del tabaco","Mes:  2019-01-01 <br>UCI: 83.9 <br>Sector: Productos del tabaco","Mes:  2019-02-01 <br>UCI: 72.9 <br>Sector: Productos del tabaco","Mes:  2019-03-01 <br>UCI: 63.8 <br>Sector: Productos del tabaco","Mes:  2019-04-01 <br>UCI: 58.6 <br>Sector: Productos del tabaco","Mes:  2019-05-01 <br>UCI: 70.8 <br>Sector: Productos del tabaco","Mes:  2019-06-01 <br>UCI: 54.6 <br>Sector: Productos del tabaco","Mes:  2019-07-01 <br>UCI: 68.9 <br>Sector: Productos del tabaco","Mes:  2019-08-01 <br>UCI: 64.6 <br>Sector: Productos del tabaco","Mes:  2019-09-01 <br>UCI: 69.2 <br>Sector: Productos del tabaco","Mes:  2019-10-01 <br>UCI: 73.1 <br>Sector: Productos del tabaco","Mes:  2019-11-01 <br>UCI: 69.7 <br>Sector: Productos del tabaco","Mes:  2019-12-01 <br>UCI: 50.1 <br>Sector: Productos del tabaco","Mes:  2020-01-01 <br>UCI: 67.3 <br>Sector: Productos del tabaco","Mes:  2020-02-01 <br>UCI: 58.2 <br>Sector: Productos del tabaco","Mes:  2020-03-01 <br>UCI: 53.6 <br>Sector: Productos del tabaco","Mes:  2020-04-01 <br>UCI: 0 <br>Sector: Productos del tabaco","Mes:  2020-05-01 <br>UCI: 62.2 <br>Sector: Productos del tabaco","Mes:  2020-06-01 <br>UCI: 97.1 <br>Sector: Productos del tabaco"],"name":"C","type":"scatter","marker":{"color":"rgba(238,145,116,1)","line":{"color":"rgba(238,145,116,1)"}},"textfont":{"color":"rgba(238,145,116,1)"},"error_y":{"color":"rgba(238,145,116,1)"},"error_x":{"color":"rgba(238,145,116,1)"},"line":{"color":"rgba(238,145,116,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[66.9,72.2,73.5,74.4,73.3,73.9,71.9,74,69.1,59,58.8,48.9,57.5,53.9,57.3,54.9,61.4,66.2,65.5,69.1,68.3,62.5,60.9,55.7,57.2,48.3,53.6,52.3,59.9,55.4,53.6,53.4,49.1,47.4,43.9,32.3,31.4,43.2,49.8,49.5,54.6,53.5,60.6,58.8,57.8,51.4,51.6,41.1,44.4,43.9,28.7,4.2,17.8,37.8],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 66.9 <br>Sector: Productos textiles","Mes:  2016-02-01 <br>UCI: 72.2 <br>Sector: Productos textiles","Mes:  2016-03-01 <br>UCI: 73.5 <br>Sector: Productos textiles","Mes:  2016-04-01 <br>UCI: 74.4 <br>Sector: Productos textiles","Mes:  2016-05-01 <br>UCI: 73.3 <br>Sector: Productos textiles","Mes:  2016-06-01 <br>UCI: 73.9 <br>Sector: Productos textiles","Mes:  2016-07-01 <br>UCI: 71.9 <br>Sector: Productos textiles","Mes:  2016-08-01 <br>UCI: 74 <br>Sector: Productos textiles","Mes:  2016-09-01 <br>UCI: 69.1 <br>Sector: Productos textiles","Mes:  2016-10-01 <br>UCI: 59 <br>Sector: Productos textiles","Mes:  2016-11-01 <br>UCI: 58.8 <br>Sector: Productos textiles","Mes:  2016-12-01 <br>UCI: 48.9 <br>Sector: Productos textiles","Mes:  2017-01-01 <br>UCI: 57.5 <br>Sector: Productos textiles","Mes:  2017-02-01 <br>UCI: 53.9 <br>Sector: Productos textiles","Mes:  2017-03-01 <br>UCI: 57.3 <br>Sector: Productos textiles","Mes:  2017-04-01 <br>UCI: 54.9 <br>Sector: Productos textiles","Mes:  2017-05-01 <br>UCI: 61.4 <br>Sector: Productos textiles","Mes:  2017-06-01 <br>UCI: 66.2 <br>Sector: Productos textiles","Mes:  2017-07-01 <br>UCI: 65.5 <br>Sector: Productos textiles","Mes:  2017-08-01 <br>UCI: 69.1 <br>Sector: Productos textiles","Mes:  2017-09-01 <br>UCI: 68.3 <br>Sector: Productos textiles","Mes:  2017-10-01 <br>UCI: 62.5 <br>Sector: Productos textiles","Mes:  2017-11-01 <br>UCI: 60.9 <br>Sector: Productos textiles","Mes:  2017-12-01 <br>UCI: 55.7 <br>Sector: Productos textiles","Mes:  2018-01-01 <br>UCI: 57.2 <br>Sector: Productos textiles","Mes:  2018-02-01 <br>UCI: 48.3 <br>Sector: Productos textiles","Mes:  2018-03-01 <br>UCI: 53.6 <br>Sector: Productos textiles","Mes:  2018-04-01 <br>UCI: 52.3 <br>Sector: Productos textiles","Mes:  2018-05-01 <br>UCI: 59.9 <br>Sector: Productos textiles","Mes:  2018-06-01 <br>UCI: 55.4 <br>Sector: Productos textiles","Mes:  2018-07-01 <br>UCI: 53.6 <br>Sector: Productos textiles","Mes:  2018-08-01 <br>UCI: 53.4 <br>Sector: Productos textiles","Mes:  2018-09-01 <br>UCI: 49.1 <br>Sector: Productos textiles","Mes:  2018-10-01 <br>UCI: 47.4 <br>Sector: Productos textiles","Mes:  2018-11-01 <br>UCI: 43.9 <br>Sector: Productos textiles","Mes:  2018-12-01 <br>UCI: 32.3 <br>Sector: Productos textiles","Mes:  2019-01-01 <br>UCI: 31.4 <br>Sector: Productos textiles","Mes:  2019-02-01 <br>UCI: 43.2 <br>Sector: Productos textiles","Mes:  2019-03-01 <br>UCI: 49.8 <br>Sector: Productos textiles","Mes:  2019-04-01 <br>UCI: 49.5 <br>Sector: Productos textiles","Mes:  2019-05-01 <br>UCI: 54.6 <br>Sector: Productos textiles","Mes:  2019-06-01 <br>UCI: 53.5 <br>Sector: Productos textiles","Mes:  2019-07-01 <br>UCI: 60.6 <br>Sector: Productos textiles","Mes:  2019-08-01 <br>UCI: 58.8 <br>Sector: Productos textiles","Mes:  2019-09-01 <br>UCI: 57.8 <br>Sector: Productos textiles","Mes:  2019-10-01 <br>UCI: 51.4 <br>Sector: Productos textiles","Mes:  2019-11-01 <br>UCI: 51.6 <br>Sector: Productos textiles","Mes:  2019-12-01 <br>UCI: 41.1 <br>Sector: Productos textiles","Mes:  2020-01-01 <br>UCI: 44.4 <br>Sector: Productos textiles","Mes:  2020-02-01 <br>UCI: 43.9 <br>Sector: Productos textiles","Mes:  2020-03-01 <br>UCI: 28.7 <br>Sector: Productos textiles","Mes:  2020-04-01 <br>UCI: 4.2 <br>Sector: Productos textiles","Mes:  2020-05-01 <br>UCI: 17.8 <br>Sector: Productos textiles","Mes:  2020-06-01 <br>UCI: 37.8 <br>Sector: Productos textiles"],"name":"D","type":"scatter","marker":{"color":"rgba(178,156,177,1)","line":{"color":"rgba(178,156,177,1)"}},"textfont":{"color":"rgba(178,156,177,1)"},"error_y":{"color":"rgba(178,156,177,1)"},"error_x":{"color":"rgba(178,156,177,1)"},"line":{"color":"rgba(178,156,177,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[84.4,79,81.4,83.8,74.6,79,83.8,91.8,80.3,86,88.2,76.7,80,85,87.7,79.6,71.8,77,81.6,88,82.5,86.8,82.7,72.8,73.5,77.2,72.8,73.1,70.5,71.7,73.8,76.1,73.8,76.5,76.1,66.8,67.4,71.7,71.1,68.4,64.8,68.7,72.9,73.4,73.1,75.1,74.6,68.1,67.9,73.7,68.9,59.9,65,68.1],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 84.4 <br>Sector: Papel y cartón","Mes:  2016-02-01 <br>UCI: 79 <br>Sector: Papel y cartón","Mes:  2016-03-01 <br>UCI: 81.4 <br>Sector: Papel y cartón","Mes:  2016-04-01 <br>UCI: 83.8 <br>Sector: Papel y cartón","Mes:  2016-05-01 <br>UCI: 74.6 <br>Sector: Papel y cartón","Mes:  2016-06-01 <br>UCI: 79 <br>Sector: Papel y cartón","Mes:  2016-07-01 <br>UCI: 83.8 <br>Sector: Papel y cartón","Mes:  2016-08-01 <br>UCI: 91.8 <br>Sector: Papel y cartón","Mes:  2016-09-01 <br>UCI: 80.3 <br>Sector: Papel y cartón","Mes:  2016-10-01 <br>UCI: 86 <br>Sector: Papel y cartón","Mes:  2016-11-01 <br>UCI: 88.2 <br>Sector: Papel y cartón","Mes:  2016-12-01 <br>UCI: 76.7 <br>Sector: Papel y cartón","Mes:  2017-01-01 <br>UCI: 80 <br>Sector: Papel y cartón","Mes:  2017-02-01 <br>UCI: 85 <br>Sector: Papel y cartón","Mes:  2017-03-01 <br>UCI: 87.7 <br>Sector: Papel y cartón","Mes:  2017-04-01 <br>UCI: 79.6 <br>Sector: Papel y cartón","Mes:  2017-05-01 <br>UCI: 71.8 <br>Sector: Papel y cartón","Mes:  2017-06-01 <br>UCI: 77 <br>Sector: Papel y cartón","Mes:  2017-07-01 <br>UCI: 81.6 <br>Sector: Papel y cartón","Mes:  2017-08-01 <br>UCI: 88 <br>Sector: Papel y cartón","Mes:  2017-09-01 <br>UCI: 82.5 <br>Sector: Papel y cartón","Mes:  2017-10-01 <br>UCI: 86.8 <br>Sector: Papel y cartón","Mes:  2017-11-01 <br>UCI: 82.7 <br>Sector: Papel y cartón","Mes:  2017-12-01 <br>UCI: 72.8 <br>Sector: Papel y cartón","Mes:  2018-01-01 <br>UCI: 73.5 <br>Sector: Papel y cartón","Mes:  2018-02-01 <br>UCI: 77.2 <br>Sector: Papel y cartón","Mes:  2018-03-01 <br>UCI: 72.8 <br>Sector: Papel y cartón","Mes:  2018-04-01 <br>UCI: 73.1 <br>Sector: Papel y cartón","Mes:  2018-05-01 <br>UCI: 70.5 <br>Sector: Papel y cartón","Mes:  2018-06-01 <br>UCI: 71.7 <br>Sector: Papel y cartón","Mes:  2018-07-01 <br>UCI: 73.8 <br>Sector: Papel y cartón","Mes:  2018-08-01 <br>UCI: 76.1 <br>Sector: Papel y cartón","Mes:  2018-09-01 <br>UCI: 73.8 <br>Sector: Papel y cartón","Mes:  2018-10-01 <br>UCI: 76.5 <br>Sector: Papel y cartón","Mes:  2018-11-01 <br>UCI: 76.1 <br>Sector: Papel y cartón","Mes:  2018-12-01 <br>UCI: 66.8 <br>Sector: Papel y cartón","Mes:  2019-01-01 <br>UCI: 67.4 <br>Sector: Papel y cartón","Mes:  2019-02-01 <br>UCI: 71.7 <br>Sector: Papel y cartón","Mes:  2019-03-01 <br>UCI: 71.1 <br>Sector: Papel y cartón","Mes:  2019-04-01 <br>UCI: 68.4 <br>Sector: Papel y cartón","Mes:  2019-05-01 <br>UCI: 64.8 <br>Sector: Papel y cartón","Mes:  2019-06-01 <br>UCI: 68.7 <br>Sector: Papel y cartón","Mes:  2019-07-01 <br>UCI: 72.9 <br>Sector: Papel y cartón","Mes:  2019-08-01 <br>UCI: 73.4 <br>Sector: Papel y cartón","Mes:  2019-09-01 <br>UCI: 73.1 <br>Sector: Papel y cartón","Mes:  2019-10-01 <br>UCI: 75.1 <br>Sector: Papel y cartón","Mes:  2019-11-01 <br>UCI: 74.6 <br>Sector: Papel y cartón","Mes:  2019-12-01 <br>UCI: 68.1 <br>Sector: Papel y cartón","Mes:  2020-01-01 <br>UCI: 67.9 <br>Sector: Papel y cartón","Mes:  2020-02-01 <br>UCI: 73.7 <br>Sector: Papel y cartón","Mes:  2020-03-01 <br>UCI: 68.9 <br>Sector: Papel y cartón","Mes:  2020-04-01 <br>UCI: 59.9 <br>Sector: Papel y cartón","Mes:  2020-05-01 <br>UCI: 65 <br>Sector: Papel y cartón","Mes:  2020-06-01 <br>UCI: 68.1 <br>Sector: Papel y cartón"],"name":"E","type":"scatter","marker":{"color":"rgba(175,154,200,1)","line":{"color":"rgba(175,154,200,1)"}},"textfont":{"color":"rgba(175,154,200,1)"},"error_y":{"color":"rgba(175,154,200,1)"},"error_x":{"color":"rgba(175,154,200,1)"},"line":{"color":"rgba(175,154,200,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[58.3,53.6,55,58.5,61.1,58.9,54.3,51.8,53.5,60.2,58.9,58.6,54,47.6,55.5,56,54.6,63.1,59.1,54.1,63,61.6,62.9,57.8,59.5,51.2,56.8,58.6,62.1,60.1,58.6,53.9,50.7,59.5,56.1,48.9,56.7,52.1,58.1,59.8,63.8,59.1,58.1,57.9,57.5,61.3,59.3,49.3,51.9,53.6,50.4,57.6,54.3,52.5],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 58.3 <br>Sector: Edición e impresión","Mes:  2016-02-01 <br>UCI: 53.6 <br>Sector: Edición e impresión","Mes:  2016-03-01 <br>UCI: 55 <br>Sector: Edición e impresión","Mes:  2016-04-01 <br>UCI: 58.5 <br>Sector: Edición e impresión","Mes:  2016-05-01 <br>UCI: 61.1 <br>Sector: Edición e impresión","Mes:  2016-06-01 <br>UCI: 58.9 <br>Sector: Edición e impresión","Mes:  2016-07-01 <br>UCI: 54.3 <br>Sector: Edición e impresión","Mes:  2016-08-01 <br>UCI: 51.8 <br>Sector: Edición e impresión","Mes:  2016-09-01 <br>UCI: 53.5 <br>Sector: Edición e impresión","Mes:  2016-10-01 <br>UCI: 60.2 <br>Sector: Edición e impresión","Mes:  2016-11-01 <br>UCI: 58.9 <br>Sector: Edición e impresión","Mes:  2016-12-01 <br>UCI: 58.6 <br>Sector: Edición e impresión","Mes:  2017-01-01 <br>UCI: 54 <br>Sector: Edición e impresión","Mes:  2017-02-01 <br>UCI: 47.6 <br>Sector: Edición e impresión","Mes:  2017-03-01 <br>UCI: 55.5 <br>Sector: Edición e impresión","Mes:  2017-04-01 <br>UCI: 56 <br>Sector: Edición e impresión","Mes:  2017-05-01 <br>UCI: 54.6 <br>Sector: Edición e impresión","Mes:  2017-06-01 <br>UCI: 63.1 <br>Sector: Edición e impresión","Mes:  2017-07-01 <br>UCI: 59.1 <br>Sector: Edición e impresión","Mes:  2017-08-01 <br>UCI: 54.1 <br>Sector: Edición e impresión","Mes:  2017-09-01 <br>UCI: 63 <br>Sector: Edición e impresión","Mes:  2017-10-01 <br>UCI: 61.6 <br>Sector: Edición e impresión","Mes:  2017-11-01 <br>UCI: 62.9 <br>Sector: Edición e impresión","Mes:  2017-12-01 <br>UCI: 57.8 <br>Sector: Edición e impresión","Mes:  2018-01-01 <br>UCI: 59.5 <br>Sector: Edición e impresión","Mes:  2018-02-01 <br>UCI: 51.2 <br>Sector: Edición e impresión","Mes:  2018-03-01 <br>UCI: 56.8 <br>Sector: Edición e impresión","Mes:  2018-04-01 <br>UCI: 58.6 <br>Sector: Edición e impresión","Mes:  2018-05-01 <br>UCI: 62.1 <br>Sector: Edición e impresión","Mes:  2018-06-01 <br>UCI: 60.1 <br>Sector: Edición e impresión","Mes:  2018-07-01 <br>UCI: 58.6 <br>Sector: Edición e impresión","Mes:  2018-08-01 <br>UCI: 53.9 <br>Sector: Edición e impresión","Mes:  2018-09-01 <br>UCI: 50.7 <br>Sector: Edición e impresión","Mes:  2018-10-01 <br>UCI: 59.5 <br>Sector: Edición e impresión","Mes:  2018-11-01 <br>UCI: 56.1 <br>Sector: Edición e impresión","Mes:  2018-12-01 <br>UCI: 48.9 <br>Sector: Edición e impresión","Mes:  2019-01-01 <br>UCI: 56.7 <br>Sector: Edición e impresión","Mes:  2019-02-01 <br>UCI: 52.1 <br>Sector: Edición e impresión","Mes:  2019-03-01 <br>UCI: 58.1 <br>Sector: Edición e impresión","Mes:  2019-04-01 <br>UCI: 59.8 <br>Sector: Edición e impresión","Mes:  2019-05-01 <br>UCI: 63.8 <br>Sector: Edición e impresión","Mes:  2019-06-01 <br>UCI: 59.1 <br>Sector: Edición e impresión","Mes:  2019-07-01 <br>UCI: 58.1 <br>Sector: Edición e impresión","Mes:  2019-08-01 <br>UCI: 57.9 <br>Sector: Edición e impresión","Mes:  2019-09-01 <br>UCI: 57.5 <br>Sector: Edición e impresión","Mes:  2019-10-01 <br>UCI: 61.3 <br>Sector: Edición e impresión","Mes:  2019-11-01 <br>UCI: 59.3 <br>Sector: Edición e impresión","Mes:  2019-12-01 <br>UCI: 49.3 <br>Sector: Edición e impresión","Mes:  2020-01-01 <br>UCI: 51.9 <br>Sector: Edición e impresión","Mes:  2020-02-01 <br>UCI: 53.6 <br>Sector: Edición e impresión","Mes:  2020-03-01 <br>UCI: 50.4 <br>Sector: Edición e impresión","Mes:  2020-04-01 <br>UCI: 57.6 <br>Sector: Edición e impresión","Mes:  2020-05-01 <br>UCI: 54.3 <br>Sector: Edición e impresión","Mes:  2020-06-01 <br>UCI: 52.5 <br>Sector: Edición e impresión"],"name":"F","type":"scatter","marker":{"color":"rgba(224,140,196,1)","line":{"color":"rgba(224,140,196,1)"}},"textfont":{"color":"rgba(224,140,196,1)"},"error_y":{"color":"rgba(224,140,196,1)"},"error_x":{"color":"rgba(224,140,196,1)"},"line":{"color":"rgba(224,140,196,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[85.1,86.8,83.4,82,80.9,86.1,84.5,80.2,81.3,84.5,83.2,84.4,85,81.6,79.9,82.4,80.6,86.4,84.4,85.3,85.7,73.4,79,86.3,81.7,82.8,78.6,78.4,77.5,68.7,66.2,78.1,75.7,78.8,73.2,77.4,76.6,71.7,76.6,72.1,78.3,73.8,75.1,79.8,77,80.8,78.7,78.6,80.7,80.1,70.8,46.2,57,67.3],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 85.1 <br>Sector: Refinación del petróleo","Mes:  2016-02-01 <br>UCI: 86.8 <br>Sector: Refinación del petróleo","Mes:  2016-03-01 <br>UCI: 83.4 <br>Sector: Refinación del petróleo","Mes:  2016-04-01 <br>UCI: 82 <br>Sector: Refinación del petróleo","Mes:  2016-05-01 <br>UCI: 80.9 <br>Sector: Refinación del petróleo","Mes:  2016-06-01 <br>UCI: 86.1 <br>Sector: Refinación del petróleo","Mes:  2016-07-01 <br>UCI: 84.5 <br>Sector: Refinación del petróleo","Mes:  2016-08-01 <br>UCI: 80.2 <br>Sector: Refinación del petróleo","Mes:  2016-09-01 <br>UCI: 81.3 <br>Sector: Refinación del petróleo","Mes:  2016-10-01 <br>UCI: 84.5 <br>Sector: Refinación del petróleo","Mes:  2016-11-01 <br>UCI: 83.2 <br>Sector: Refinación del petróleo","Mes:  2016-12-01 <br>UCI: 84.4 <br>Sector: Refinación del petróleo","Mes:  2017-01-01 <br>UCI: 85 <br>Sector: Refinación del petróleo","Mes:  2017-02-01 <br>UCI: 81.6 <br>Sector: Refinación del petróleo","Mes:  2017-03-01 <br>UCI: 79.9 <br>Sector: Refinación del petróleo","Mes:  2017-04-01 <br>UCI: 82.4 <br>Sector: Refinación del petróleo","Mes:  2017-05-01 <br>UCI: 80.6 <br>Sector: Refinación del petróleo","Mes:  2017-06-01 <br>UCI: 86.4 <br>Sector: Refinación del petróleo","Mes:  2017-07-01 <br>UCI: 84.4 <br>Sector: Refinación del petróleo","Mes:  2017-08-01 <br>UCI: 85.3 <br>Sector: Refinación del petróleo","Mes:  2017-09-01 <br>UCI: 85.7 <br>Sector: Refinación del petróleo","Mes:  2017-10-01 <br>UCI: 73.4 <br>Sector: Refinación del petróleo","Mes:  2017-11-01 <br>UCI: 79 <br>Sector: Refinación del petróleo","Mes:  2017-12-01 <br>UCI: 86.3 <br>Sector: Refinación del petróleo","Mes:  2018-01-01 <br>UCI: 81.7 <br>Sector: Refinación del petróleo","Mes:  2018-02-01 <br>UCI: 82.8 <br>Sector: Refinación del petróleo","Mes:  2018-03-01 <br>UCI: 78.6 <br>Sector: Refinación del petróleo","Mes:  2018-04-01 <br>UCI: 78.4 <br>Sector: Refinación del petróleo","Mes:  2018-05-01 <br>UCI: 77.5 <br>Sector: Refinación del petróleo","Mes:  2018-06-01 <br>UCI: 68.7 <br>Sector: Refinación del petróleo","Mes:  2018-07-01 <br>UCI: 66.2 <br>Sector: Refinación del petróleo","Mes:  2018-08-01 <br>UCI: 78.1 <br>Sector: Refinación del petróleo","Mes:  2018-09-01 <br>UCI: 75.7 <br>Sector: Refinación del petróleo","Mes:  2018-10-01 <br>UCI: 78.8 <br>Sector: Refinación del petróleo","Mes:  2018-11-01 <br>UCI: 73.2 <br>Sector: Refinación del petróleo","Mes:  2018-12-01 <br>UCI: 77.4 <br>Sector: Refinación del petróleo","Mes:  2019-01-01 <br>UCI: 76.6 <br>Sector: Refinación del petróleo","Mes:  2019-02-01 <br>UCI: 71.7 <br>Sector: Refinación del petróleo","Mes:  2019-03-01 <br>UCI: 76.6 <br>Sector: Refinación del petróleo","Mes:  2019-04-01 <br>UCI: 72.1 <br>Sector: Refinación del petróleo","Mes:  2019-05-01 <br>UCI: 78.3 <br>Sector: Refinación del petróleo","Mes:  2019-06-01 <br>UCI: 73.8 <br>Sector: Refinación del petróleo","Mes:  2019-07-01 <br>UCI: 75.1 <br>Sector: Refinación del petróleo","Mes:  2019-08-01 <br>UCI: 79.8 <br>Sector: Refinación del petróleo","Mes:  2019-09-01 <br>UCI: 77 <br>Sector: Refinación del petróleo","Mes:  2019-10-01 <br>UCI: 80.8 <br>Sector: Refinación del petróleo","Mes:  2019-11-01 <br>UCI: 78.7 <br>Sector: Refinación del petróleo","Mes:  2019-12-01 <br>UCI: 78.6 <br>Sector: Refinación del petróleo","Mes:  2020-01-01 <br>UCI: 80.7 <br>Sector: Refinación del petróleo","Mes:  2020-02-01 <br>UCI: 80.1 <br>Sector: Refinación del petróleo","Mes:  2020-03-01 <br>UCI: 70.8 <br>Sector: Refinación del petróleo","Mes:  2020-04-01 <br>UCI: 46.2 <br>Sector: Refinación del petróleo","Mes:  2020-05-01 <br>UCI: 57 <br>Sector: Refinación del petróleo","Mes:  2020-06-01 <br>UCI: 67.3 <br>Sector: Refinación del petróleo"],"name":"G","type":"scatter","marker":{"color":"rgba(205,181,144,1)","line":{"color":"rgba(205,181,144,1)"}},"textfont":{"color":"rgba(205,181,144,1)"},"error_y":{"color":"rgba(205,181,144,1)"},"error_x":{"color":"rgba(205,181,144,1)"},"line":{"color":"rgba(205,181,144,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[66.1,66.8,66.3,67.9,65.3,64.6,60.6,59.1,68.5,70.3,74.3,65.1,68.5,68.8,67.3,68.6,66.9,67.5,59.1,62.3,64,70.9,71,68.9,70.8,73,71.9,72.4,65.6,61.8,50.8,54.1,63.2,69.1,70,66.4,68.9,69.4,69.6,70.5,70.8,57.2,47.5,51.6,47.7,63.7,68.7,68.8,73.8,71.4,68.5,69.3,63,59.8],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 66.1 <br>Sector: Sustancias y productos químicos","Mes:  2016-02-01 <br>UCI: 66.8 <br>Sector: Sustancias y productos químicos","Mes:  2016-03-01 <br>UCI: 66.3 <br>Sector: Sustancias y productos químicos","Mes:  2016-04-01 <br>UCI: 67.9 <br>Sector: Sustancias y productos químicos","Mes:  2016-05-01 <br>UCI: 65.3 <br>Sector: Sustancias y productos químicos","Mes:  2016-06-01 <br>UCI: 64.6 <br>Sector: Sustancias y productos químicos","Mes:  2016-07-01 <br>UCI: 60.6 <br>Sector: Sustancias y productos químicos","Mes:  2016-08-01 <br>UCI: 59.1 <br>Sector: Sustancias y productos químicos","Mes:  2016-09-01 <br>UCI: 68.5 <br>Sector: Sustancias y productos químicos","Mes:  2016-10-01 <br>UCI: 70.3 <br>Sector: Sustancias y productos químicos","Mes:  2016-11-01 <br>UCI: 74.3 <br>Sector: Sustancias y productos químicos","Mes:  2016-12-01 <br>UCI: 65.1 <br>Sector: Sustancias y productos químicos","Mes:  2017-01-01 <br>UCI: 68.5 <br>Sector: Sustancias y productos químicos","Mes:  2017-02-01 <br>UCI: 68.8 <br>Sector: Sustancias y productos químicos","Mes:  2017-03-01 <br>UCI: 67.3 <br>Sector: Sustancias y productos químicos","Mes:  2017-04-01 <br>UCI: 68.6 <br>Sector: Sustancias y productos químicos","Mes:  2017-05-01 <br>UCI: 66.9 <br>Sector: Sustancias y productos químicos","Mes:  2017-06-01 <br>UCI: 67.5 <br>Sector: Sustancias y productos químicos","Mes:  2017-07-01 <br>UCI: 59.1 <br>Sector: Sustancias y productos químicos","Mes:  2017-08-01 <br>UCI: 62.3 <br>Sector: Sustancias y productos químicos","Mes:  2017-09-01 <br>UCI: 64 <br>Sector: Sustancias y productos químicos","Mes:  2017-10-01 <br>UCI: 70.9 <br>Sector: Sustancias y productos químicos","Mes:  2017-11-01 <br>UCI: 71 <br>Sector: Sustancias y productos químicos","Mes:  2017-12-01 <br>UCI: 68.9 <br>Sector: Sustancias y productos químicos","Mes:  2018-01-01 <br>UCI: 70.8 <br>Sector: Sustancias y productos químicos","Mes:  2018-02-01 <br>UCI: 73 <br>Sector: Sustancias y productos químicos","Mes:  2018-03-01 <br>UCI: 71.9 <br>Sector: Sustancias y productos químicos","Mes:  2018-04-01 <br>UCI: 72.4 <br>Sector: Sustancias y productos químicos","Mes:  2018-05-01 <br>UCI: 65.6 <br>Sector: Sustancias y productos químicos","Mes:  2018-06-01 <br>UCI: 61.8 <br>Sector: Sustancias y productos químicos","Mes:  2018-07-01 <br>UCI: 50.8 <br>Sector: Sustancias y productos químicos","Mes:  2018-08-01 <br>UCI: 54.1 <br>Sector: Sustancias y productos químicos","Mes:  2018-09-01 <br>UCI: 63.2 <br>Sector: Sustancias y productos químicos","Mes:  2018-10-01 <br>UCI: 69.1 <br>Sector: Sustancias y productos químicos","Mes:  2018-11-01 <br>UCI: 70 <br>Sector: Sustancias y productos químicos","Mes:  2018-12-01 <br>UCI: 66.4 <br>Sector: Sustancias y productos químicos","Mes:  2019-01-01 <br>UCI: 68.9 <br>Sector: Sustancias y productos químicos","Mes:  2019-02-01 <br>UCI: 69.4 <br>Sector: Sustancias y productos químicos","Mes:  2019-03-01 <br>UCI: 69.6 <br>Sector: Sustancias y productos químicos","Mes:  2019-04-01 <br>UCI: 70.5 <br>Sector: Sustancias y productos químicos","Mes:  2019-05-01 <br>UCI: 70.8 <br>Sector: Sustancias y productos químicos","Mes:  2019-06-01 <br>UCI: 57.2 <br>Sector: Sustancias y productos químicos","Mes:  2019-07-01 <br>UCI: 47.5 <br>Sector: Sustancias y productos químicos","Mes:  2019-08-01 <br>UCI: 51.6 <br>Sector: Sustancias y productos químicos","Mes:  2019-09-01 <br>UCI: 47.7 <br>Sector: Sustancias y productos químicos","Mes:  2019-10-01 <br>UCI: 63.7 <br>Sector: Sustancias y productos químicos","Mes:  2019-11-01 <br>UCI: 68.7 <br>Sector: Sustancias y productos químicos","Mes:  2019-12-01 <br>UCI: 68.8 <br>Sector: Sustancias y productos químicos","Mes:  2020-01-01 <br>UCI: 73.8 <br>Sector: Sustancias y productos químicos","Mes:  2020-02-01 <br>UCI: 71.4 <br>Sector: Sustancias y productos químicos","Mes:  2020-03-01 <br>UCI: 68.5 <br>Sector: Sustancias y productos químicos","Mes:  2020-04-01 <br>UCI: 69.3 <br>Sector: Sustancias y productos químicos","Mes:  2020-05-01 <br>UCI: 63 <br>Sector: Sustancias y productos químicos","Mes:  2020-06-01 <br>UCI: 59.8 <br>Sector: Sustancias y productos químicos"],"name":"H","type":"scatter","marker":{"color":"rgba(174,216,81,1)","line":{"color":"rgba(174,216,81,1)"}},"textfont":{"color":"rgba(174,216,81,1)"},"error_y":{"color":"rgba(174,216,81,1)"},"error_x":{"color":"rgba(174,216,81,1)"},"line":{"color":"rgba(174,216,81,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[58.8,53.6,56.2,60.2,60.4,62,58.2,56.6,55.2,52.8,62.6,62.9,58.5,54.1,55,57.9,64,65.8,65,60.1,56.9,55.5,59.9,61.5,58.2,53.3,56.7,61.8,62.4,54.8,54.3,57.6,52.4,52.1,51.6,47.2,48.4,50.8,48.7,51.5,50.9,50.1,51.6,50.2,51.3,53.4,54.7,44.7,45.1,47,39.8,31.7,36.4,46.6],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 58.8 <br>Sector: Productos de caucho y plástico","Mes:  2016-02-01 <br>UCI: 53.6 <br>Sector: Productos de caucho y plástico","Mes:  2016-03-01 <br>UCI: 56.2 <br>Sector: Productos de caucho y plástico","Mes:  2016-04-01 <br>UCI: 60.2 <br>Sector: Productos de caucho y plástico","Mes:  2016-05-01 <br>UCI: 60.4 <br>Sector: Productos de caucho y plástico","Mes:  2016-06-01 <br>UCI: 62 <br>Sector: Productos de caucho y plástico","Mes:  2016-07-01 <br>UCI: 58.2 <br>Sector: Productos de caucho y plástico","Mes:  2016-08-01 <br>UCI: 56.6 <br>Sector: Productos de caucho y plástico","Mes:  2016-09-01 <br>UCI: 55.2 <br>Sector: Productos de caucho y plástico","Mes:  2016-10-01 <br>UCI: 52.8 <br>Sector: Productos de caucho y plástico","Mes:  2016-11-01 <br>UCI: 62.6 <br>Sector: Productos de caucho y plástico","Mes:  2016-12-01 <br>UCI: 62.9 <br>Sector: Productos de caucho y plástico","Mes:  2017-01-01 <br>UCI: 58.5 <br>Sector: Productos de caucho y plástico","Mes:  2017-02-01 <br>UCI: 54.1 <br>Sector: Productos de caucho y plástico","Mes:  2017-03-01 <br>UCI: 55 <br>Sector: Productos de caucho y plástico","Mes:  2017-04-01 <br>UCI: 57.9 <br>Sector: Productos de caucho y plástico","Mes:  2017-05-01 <br>UCI: 64 <br>Sector: Productos de caucho y plástico","Mes:  2017-06-01 <br>UCI: 65.8 <br>Sector: Productos de caucho y plástico","Mes:  2017-07-01 <br>UCI: 65 <br>Sector: Productos de caucho y plástico","Mes:  2017-08-01 <br>UCI: 60.1 <br>Sector: Productos de caucho y plástico","Mes:  2017-09-01 <br>UCI: 56.9 <br>Sector: Productos de caucho y plástico","Mes:  2017-10-01 <br>UCI: 55.5 <br>Sector: Productos de caucho y plástico","Mes:  2017-11-01 <br>UCI: 59.9 <br>Sector: Productos de caucho y plástico","Mes:  2017-12-01 <br>UCI: 61.5 <br>Sector: Productos de caucho y plástico","Mes:  2018-01-01 <br>UCI: 58.2 <br>Sector: Productos de caucho y plástico","Mes:  2018-02-01 <br>UCI: 53.3 <br>Sector: Productos de caucho y plástico","Mes:  2018-03-01 <br>UCI: 56.7 <br>Sector: Productos de caucho y plástico","Mes:  2018-04-01 <br>UCI: 61.8 <br>Sector: Productos de caucho y plástico","Mes:  2018-05-01 <br>UCI: 62.4 <br>Sector: Productos de caucho y plástico","Mes:  2018-06-01 <br>UCI: 54.8 <br>Sector: Productos de caucho y plástico","Mes:  2018-07-01 <br>UCI: 54.3 <br>Sector: Productos de caucho y plástico","Mes:  2018-08-01 <br>UCI: 57.6 <br>Sector: Productos de caucho y plástico","Mes:  2018-09-01 <br>UCI: 52.4 <br>Sector: Productos de caucho y plástico","Mes:  2018-10-01 <br>UCI: 52.1 <br>Sector: Productos de caucho y plástico","Mes:  2018-11-01 <br>UCI: 51.6 <br>Sector: Productos de caucho y plástico","Mes:  2018-12-01 <br>UCI: 47.2 <br>Sector: Productos de caucho y plástico","Mes:  2019-01-01 <br>UCI: 48.4 <br>Sector: Productos de caucho y plástico","Mes:  2019-02-01 <br>UCI: 50.8 <br>Sector: Productos de caucho y plástico","Mes:  2019-03-01 <br>UCI: 48.7 <br>Sector: Productos de caucho y plástico","Mes:  2019-04-01 <br>UCI: 51.5 <br>Sector: Productos de caucho y plástico","Mes:  2019-05-01 <br>UCI: 50.9 <br>Sector: Productos de caucho y plástico","Mes:  2019-06-01 <br>UCI: 50.1 <br>Sector: Productos de caucho y plástico","Mes:  2019-07-01 <br>UCI: 51.6 <br>Sector: Productos de caucho y plástico","Mes:  2019-08-01 <br>UCI: 50.2 <br>Sector: Productos de caucho y plástico","Mes:  2019-09-01 <br>UCI: 51.3 <br>Sector: Productos de caucho y plástico","Mes:  2019-10-01 <br>UCI: 53.4 <br>Sector: Productos de caucho y plástico","Mes:  2019-11-01 <br>UCI: 54.7 <br>Sector: Productos de caucho y plástico","Mes:  2019-12-01 <br>UCI: 44.7 <br>Sector: Productos de caucho y plástico","Mes:  2020-01-01 <br>UCI: 45.1 <br>Sector: Productos de caucho y plástico","Mes:  2020-02-01 <br>UCI: 47 <br>Sector: Productos de caucho y plástico","Mes:  2020-03-01 <br>UCI: 39.8 <br>Sector: Productos de caucho y plástico","Mes:  2020-04-01 <br>UCI: 31.7 <br>Sector: Productos de caucho y plástico","Mes:  2020-05-01 <br>UCI: 36.4 <br>Sector: Productos de caucho y plástico","Mes:  2020-06-01 <br>UCI: 46.6 <br>Sector: Productos de caucho y plástico"],"name":"I","type":"scatter","marker":{"color":"rgba(227,217,62,1)","line":{"color":"rgba(227,217,62,1)"}},"textfont":{"color":"rgba(227,217,62,1)"},"error_y":{"color":"rgba(227,217,62,1)"},"error_x":{"color":"rgba(227,217,62,1)"},"line":{"color":"rgba(227,217,62,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[63.2,73.1,75.4,75.4,72.9,71.5,66.4,73.1,70.7,70.7,72.2,69.6,53.3,68.7,75.6,71,72.4,76.7,72.3,77.1,74.7,77.2,80.6,76.7,67.6,74.2,76.1,74.2,72.9,70.6,71.4,72.1,74.1,73.7,72.7,61.5,57.1,67.5,62.4,67.2,64.8,67.1,67.2,71.9,75.4,72.2,71.1,57.2,54.4,62.4,42.1,22.5,38.5,61.8],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 63.2 <br>Sector: Productos minerales no metálicos","Mes:  2016-02-01 <br>UCI: 73.1 <br>Sector: Productos minerales no metálicos","Mes:  2016-03-01 <br>UCI: 75.4 <br>Sector: Productos minerales no metálicos","Mes:  2016-04-01 <br>UCI: 75.4 <br>Sector: Productos minerales no metálicos","Mes:  2016-05-01 <br>UCI: 72.9 <br>Sector: Productos minerales no metálicos","Mes:  2016-06-01 <br>UCI: 71.5 <br>Sector: Productos minerales no metálicos","Mes:  2016-07-01 <br>UCI: 66.4 <br>Sector: Productos minerales no metálicos","Mes:  2016-08-01 <br>UCI: 73.1 <br>Sector: Productos minerales no metálicos","Mes:  2016-09-01 <br>UCI: 70.7 <br>Sector: Productos minerales no metálicos","Mes:  2016-10-01 <br>UCI: 70.7 <br>Sector: Productos minerales no metálicos","Mes:  2016-11-01 <br>UCI: 72.2 <br>Sector: Productos minerales no metálicos","Mes:  2016-12-01 <br>UCI: 69.6 <br>Sector: Productos minerales no metálicos","Mes:  2017-01-01 <br>UCI: 53.3 <br>Sector: Productos minerales no metálicos","Mes:  2017-02-01 <br>UCI: 68.7 <br>Sector: Productos minerales no metálicos","Mes:  2017-03-01 <br>UCI: 75.6 <br>Sector: Productos minerales no metálicos","Mes:  2017-04-01 <br>UCI: 71 <br>Sector: Productos minerales no metálicos","Mes:  2017-05-01 <br>UCI: 72.4 <br>Sector: Productos minerales no metálicos","Mes:  2017-06-01 <br>UCI: 76.7 <br>Sector: Productos minerales no metálicos","Mes:  2017-07-01 <br>UCI: 72.3 <br>Sector: Productos minerales no metálicos","Mes:  2017-08-01 <br>UCI: 77.1 <br>Sector: Productos minerales no metálicos","Mes:  2017-09-01 <br>UCI: 74.7 <br>Sector: Productos minerales no metálicos","Mes:  2017-10-01 <br>UCI: 77.2 <br>Sector: Productos minerales no metálicos","Mes:  2017-11-01 <br>UCI: 80.6 <br>Sector: Productos minerales no metálicos","Mes:  2017-12-01 <br>UCI: 76.7 <br>Sector: Productos minerales no metálicos","Mes:  2018-01-01 <br>UCI: 67.6 <br>Sector: Productos minerales no metálicos","Mes:  2018-02-01 <br>UCI: 74.2 <br>Sector: Productos minerales no metálicos","Mes:  2018-03-01 <br>UCI: 76.1 <br>Sector: Productos minerales no metálicos","Mes:  2018-04-01 <br>UCI: 74.2 <br>Sector: Productos minerales no metálicos","Mes:  2018-05-01 <br>UCI: 72.9 <br>Sector: Productos minerales no metálicos","Mes:  2018-06-01 <br>UCI: 70.6 <br>Sector: Productos minerales no metálicos","Mes:  2018-07-01 <br>UCI: 71.4 <br>Sector: Productos minerales no metálicos","Mes:  2018-08-01 <br>UCI: 72.1 <br>Sector: Productos minerales no metálicos","Mes:  2018-09-01 <br>UCI: 74.1 <br>Sector: Productos minerales no metálicos","Mes:  2018-10-01 <br>UCI: 73.7 <br>Sector: Productos minerales no metálicos","Mes:  2018-11-01 <br>UCI: 72.7 <br>Sector: Productos minerales no metálicos","Mes:  2018-12-01 <br>UCI: 61.5 <br>Sector: Productos minerales no metálicos","Mes:  2019-01-01 <br>UCI: 57.1 <br>Sector: Productos minerales no metálicos","Mes:  2019-02-01 <br>UCI: 67.5 <br>Sector: Productos minerales no metálicos","Mes:  2019-03-01 <br>UCI: 62.4 <br>Sector: Productos minerales no metálicos","Mes:  2019-04-01 <br>UCI: 67.2 <br>Sector: Productos minerales no metálicos","Mes:  2019-05-01 <br>UCI: 64.8 <br>Sector: Productos minerales no metálicos","Mes:  2019-06-01 <br>UCI: 67.1 <br>Sector: Productos minerales no metálicos","Mes:  2019-07-01 <br>UCI: 67.2 <br>Sector: Productos minerales no metálicos","Mes:  2019-08-01 <br>UCI: 71.9 <br>Sector: Productos minerales no metálicos","Mes:  2019-09-01 <br>UCI: 75.4 <br>Sector: Productos minerales no metálicos","Mes:  2019-10-01 <br>UCI: 72.2 <br>Sector: Productos minerales no metálicos","Mes:  2019-11-01 <br>UCI: 71.1 <br>Sector: Productos minerales no metálicos","Mes:  2019-12-01 <br>UCI: 57.2 <br>Sector: Productos minerales no metálicos","Mes:  2020-01-01 <br>UCI: 54.4 <br>Sector: Productos minerales no metálicos","Mes:  2020-02-01 <br>UCI: 62.4 <br>Sector: Productos minerales no metálicos","Mes:  2020-03-01 <br>UCI: 42.1 <br>Sector: Productos minerales no metálicos","Mes:  2020-04-01 <br>UCI: 22.5 <br>Sector: Productos minerales no metálicos","Mes:  2020-05-01 <br>UCI: 38.5 <br>Sector: Productos minerales no metálicos","Mes:  2020-06-01 <br>UCI: 61.8 <br>Sector: Productos minerales no metálicos"],"name":"J","type":"scatter","marker":{"color":"rgba(250,212,80,1)","line":{"color":"rgba(250,212,80,1)"}},"textfont":{"color":"rgba(250,212,80,1)"},"error_y":{"color":"rgba(250,212,80,1)"},"error_x":{"color":"rgba(250,212,80,1)"},"line":{"color":"rgba(250,212,80,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[65.2,70.7,63.6,65.2,73.5,73.3,68.5,66.6,65.3,72.8,71.6,62.8,58.4,65.7,75.6,73.6,75.2,73.7,75.9,79.5,81,82.9,83.1,73.3,67.4,86.2,88,88.6,82,80.5,86.3,85.2,84.3,83.9,88,69.4,71.7,68.7,74.7,82,77.5,80.2,79.3,81.8,79.1,73.1,73.6,66.1,61.5,72.9,58.5,25.1,39,48.4],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 65.2 <br>Sector: Industrias metálicas básicas","Mes:  2016-02-01 <br>UCI: 70.7 <br>Sector: Industrias metálicas básicas","Mes:  2016-03-01 <br>UCI: 63.6 <br>Sector: Industrias metálicas básicas","Mes:  2016-04-01 <br>UCI: 65.2 <br>Sector: Industrias metálicas básicas","Mes:  2016-05-01 <br>UCI: 73.5 <br>Sector: Industrias metálicas básicas","Mes:  2016-06-01 <br>UCI: 73.3 <br>Sector: Industrias metálicas básicas","Mes:  2016-07-01 <br>UCI: 68.5 <br>Sector: Industrias metálicas básicas","Mes:  2016-08-01 <br>UCI: 66.6 <br>Sector: Industrias metálicas básicas","Mes:  2016-09-01 <br>UCI: 65.3 <br>Sector: Industrias metálicas básicas","Mes:  2016-10-01 <br>UCI: 72.8 <br>Sector: Industrias metálicas básicas","Mes:  2016-11-01 <br>UCI: 71.6 <br>Sector: Industrias metálicas básicas","Mes:  2016-12-01 <br>UCI: 62.8 <br>Sector: Industrias metálicas básicas","Mes:  2017-01-01 <br>UCI: 58.4 <br>Sector: Industrias metálicas básicas","Mes:  2017-02-01 <br>UCI: 65.7 <br>Sector: Industrias metálicas básicas","Mes:  2017-03-01 <br>UCI: 75.6 <br>Sector: Industrias metálicas básicas","Mes:  2017-04-01 <br>UCI: 73.6 <br>Sector: Industrias metálicas básicas","Mes:  2017-05-01 <br>UCI: 75.2 <br>Sector: Industrias metálicas básicas","Mes:  2017-06-01 <br>UCI: 73.7 <br>Sector: Industrias metálicas básicas","Mes:  2017-07-01 <br>UCI: 75.9 <br>Sector: Industrias metálicas básicas","Mes:  2017-08-01 <br>UCI: 79.5 <br>Sector: Industrias metálicas básicas","Mes:  2017-09-01 <br>UCI: 81 <br>Sector: Industrias metálicas básicas","Mes:  2017-10-01 <br>UCI: 82.9 <br>Sector: Industrias metálicas básicas","Mes:  2017-11-01 <br>UCI: 83.1 <br>Sector: Industrias metálicas básicas","Mes:  2017-12-01 <br>UCI: 73.3 <br>Sector: Industrias metálicas básicas","Mes:  2018-01-01 <br>UCI: 67.4 <br>Sector: Industrias metálicas básicas","Mes:  2018-02-01 <br>UCI: 86.2 <br>Sector: Industrias metálicas básicas","Mes:  2018-03-01 <br>UCI: 88 <br>Sector: Industrias metálicas básicas","Mes:  2018-04-01 <br>UCI: 88.6 <br>Sector: Industrias metálicas básicas","Mes:  2018-05-01 <br>UCI: 82 <br>Sector: Industrias metálicas básicas","Mes:  2018-06-01 <br>UCI: 80.5 <br>Sector: Industrias metálicas básicas","Mes:  2018-07-01 <br>UCI: 86.3 <br>Sector: Industrias metálicas básicas","Mes:  2018-08-01 <br>UCI: 85.2 <br>Sector: Industrias metálicas básicas","Mes:  2018-09-01 <br>UCI: 84.3 <br>Sector: Industrias metálicas básicas","Mes:  2018-10-01 <br>UCI: 83.9 <br>Sector: Industrias metálicas básicas","Mes:  2018-11-01 <br>UCI: 88 <br>Sector: Industrias metálicas básicas","Mes:  2018-12-01 <br>UCI: 69.4 <br>Sector: Industrias metálicas básicas","Mes:  2019-01-01 <br>UCI: 71.7 <br>Sector: Industrias metálicas básicas","Mes:  2019-02-01 <br>UCI: 68.7 <br>Sector: Industrias metálicas básicas","Mes:  2019-03-01 <br>UCI: 74.7 <br>Sector: Industrias metálicas básicas","Mes:  2019-04-01 <br>UCI: 82 <br>Sector: Industrias metálicas básicas","Mes:  2019-05-01 <br>UCI: 77.5 <br>Sector: Industrias metálicas básicas","Mes:  2019-06-01 <br>UCI: 80.2 <br>Sector: Industrias metálicas básicas","Mes:  2019-07-01 <br>UCI: 79.3 <br>Sector: Industrias metálicas básicas","Mes:  2019-08-01 <br>UCI: 81.8 <br>Sector: Industrias metálicas básicas","Mes:  2019-09-01 <br>UCI: 79.1 <br>Sector: Industrias metálicas básicas","Mes:  2019-10-01 <br>UCI: 73.1 <br>Sector: Industrias metálicas básicas","Mes:  2019-11-01 <br>UCI: 73.6 <br>Sector: Industrias metálicas básicas","Mes:  2019-12-01 <br>UCI: 66.1 <br>Sector: Industrias metálicas básicas","Mes:  2020-01-01 <br>UCI: 61.5 <br>Sector: Industrias metálicas básicas","Mes:  2020-02-01 <br>UCI: 72.9 <br>Sector: Industrias metálicas básicas","Mes:  2020-03-01 <br>UCI: 58.5 <br>Sector: Industrias metálicas básicas","Mes:  2020-04-01 <br>UCI: 25.1 <br>Sector: Industrias metálicas básicas","Mes:  2020-05-01 <br>UCI: 39 <br>Sector: Industrias metálicas básicas","Mes:  2020-06-01 <br>UCI: 48.4 <br>Sector: Industrias metálicas básicas"],"name":"K","type":"scatter","marker":{"color":"rgba(234,199,134,1)","line":{"color":"rgba(234,199,134,1)"}},"textfont":{"color":"rgba(234,199,134,1)"},"error_y":{"color":"rgba(234,199,134,1)"},"error_x":{"color":"rgba(234,199,134,1)"},"line":{"color":"rgba(234,199,134,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[20.4,43.1,55.5,54.6,47.5,50.7,45,51.4,51.4,44.1,56.3,45,30.7,31.5,48.2,46.5,54.5,55,45.5,55.1,57.1,52.9,55,38.3,25.6,50.4,58.2,55.8,55.2,47.7,48.1,57.3,44.8,45.9,44.4,25.6,15.7,42.1,35,37.6,36.6,34,30,43.5,37.4,43.2,38.7,21.1,26.3,37.5,25.9,0,6.2,23],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 20.4 <br>Sector: Industria automotriz","Mes:  2016-02-01 <br>UCI: 43.1 <br>Sector: Industria automotriz","Mes:  2016-03-01 <br>UCI: 55.5 <br>Sector: Industria automotriz","Mes:  2016-04-01 <br>UCI: 54.6 <br>Sector: Industria automotriz","Mes:  2016-05-01 <br>UCI: 47.5 <br>Sector: Industria automotriz","Mes:  2016-06-01 <br>UCI: 50.7 <br>Sector: Industria automotriz","Mes:  2016-07-01 <br>UCI: 45 <br>Sector: Industria automotriz","Mes:  2016-08-01 <br>UCI: 51.4 <br>Sector: Industria automotriz","Mes:  2016-09-01 <br>UCI: 51.4 <br>Sector: Industria automotriz","Mes:  2016-10-01 <br>UCI: 44.1 <br>Sector: Industria automotriz","Mes:  2016-11-01 <br>UCI: 56.3 <br>Sector: Industria automotriz","Mes:  2016-12-01 <br>UCI: 45 <br>Sector: Industria automotriz","Mes:  2017-01-01 <br>UCI: 30.7 <br>Sector: Industria automotriz","Mes:  2017-02-01 <br>UCI: 31.5 <br>Sector: Industria automotriz","Mes:  2017-03-01 <br>UCI: 48.2 <br>Sector: Industria automotriz","Mes:  2017-04-01 <br>UCI: 46.5 <br>Sector: Industria automotriz","Mes:  2017-05-01 <br>UCI: 54.5 <br>Sector: Industria automotriz","Mes:  2017-06-01 <br>UCI: 55 <br>Sector: Industria automotriz","Mes:  2017-07-01 <br>UCI: 45.5 <br>Sector: Industria automotriz","Mes:  2017-08-01 <br>UCI: 55.1 <br>Sector: Industria automotriz","Mes:  2017-09-01 <br>UCI: 57.1 <br>Sector: Industria automotriz","Mes:  2017-10-01 <br>UCI: 52.9 <br>Sector: Industria automotriz","Mes:  2017-11-01 <br>UCI: 55 <br>Sector: Industria automotriz","Mes:  2017-12-01 <br>UCI: 38.3 <br>Sector: Industria automotriz","Mes:  2018-01-01 <br>UCI: 25.6 <br>Sector: Industria automotriz","Mes:  2018-02-01 <br>UCI: 50.4 <br>Sector: Industria automotriz","Mes:  2018-03-01 <br>UCI: 58.2 <br>Sector: Industria automotriz","Mes:  2018-04-01 <br>UCI: 55.8 <br>Sector: Industria automotriz","Mes:  2018-05-01 <br>UCI: 55.2 <br>Sector: Industria automotriz","Mes:  2018-06-01 <br>UCI: 47.7 <br>Sector: Industria automotriz","Mes:  2018-07-01 <br>UCI: 48.1 <br>Sector: Industria automotriz","Mes:  2018-08-01 <br>UCI: 57.3 <br>Sector: Industria automotriz","Mes:  2018-09-01 <br>UCI: 44.8 <br>Sector: Industria automotriz","Mes:  2018-10-01 <br>UCI: 45.9 <br>Sector: Industria automotriz","Mes:  2018-11-01 <br>UCI: 44.4 <br>Sector: Industria automotriz","Mes:  2018-12-01 <br>UCI: 25.6 <br>Sector: Industria automotriz","Mes:  2019-01-01 <br>UCI: 15.7 <br>Sector: Industria automotriz","Mes:  2019-02-01 <br>UCI: 42.1 <br>Sector: Industria automotriz","Mes:  2019-03-01 <br>UCI: 35 <br>Sector: Industria automotriz","Mes:  2019-04-01 <br>UCI: 37.6 <br>Sector: Industria automotriz","Mes:  2019-05-01 <br>UCI: 36.6 <br>Sector: Industria automotriz","Mes:  2019-06-01 <br>UCI: 34 <br>Sector: Industria automotriz","Mes:  2019-07-01 <br>UCI: 30 <br>Sector: Industria automotriz","Mes:  2019-08-01 <br>UCI: 43.5 <br>Sector: Industria automotriz","Mes:  2019-09-01 <br>UCI: 37.4 <br>Sector: Industria automotriz","Mes:  2019-10-01 <br>UCI: 43.2 <br>Sector: Industria automotriz","Mes:  2019-11-01 <br>UCI: 38.7 <br>Sector: Industria automotriz","Mes:  2019-12-01 <br>UCI: 21.1 <br>Sector: Industria automotriz","Mes:  2020-01-01 <br>UCI: 26.3 <br>Sector: Industria automotriz","Mes:  2020-02-01 <br>UCI: 37.5 <br>Sector: Industria automotriz","Mes:  2020-03-01 <br>UCI: 25.9 <br>Sector: Industria automotriz","Mes:  2020-04-01 <br>UCI: 0 <br>Sector: Industria automotriz","Mes:  2020-05-01 <br>UCI: 6.2 <br>Sector: Industria automotriz","Mes:  2020-06-01 <br>UCI: 23 <br>Sector: Industria automotriz"],"name":"L","type":"scatter","marker":{"color":"rgba(209,189,161,1)","line":{"color":"rgba(209,189,161,1)"}},"textfont":{"color":"rgba(209,189,161,1)"},"error_y":{"color":"rgba(209,189,161,1)"},"error_x":{"color":"rgba(209,189,161,1)"},"line":{"color":"rgba(209,189,161,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016-01-01","2016-02-01","2016-03-01","2016-04-01","2016-05-01","2016-06-01","2016-07-01","2016-08-01","2016-09-01","2016-10-01","2016-11-01","2016-12-01","2017-01-01","2017-02-01","2017-03-01","2017-04-01","2017-05-01","2017-06-01","2017-07-01","2017-08-01","2017-09-01","2017-10-01","2017-11-01","2017-12-01","2018-01-01","2018-02-01","2018-03-01","2018-04-01","2018-05-01","2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01","2018-11-01","2018-12-01","2019-01-01","2019-02-01","2019-03-01","2019-04-01","2019-05-01","2019-06-01","2019-07-01","2019-08-01","2019-09-01","2019-10-01","2019-11-01","2019-12-01","2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01"],"y":[52.2,51.1,53.1,53.2,56,54.8,51.1,51.2,51.9,55.7,57.2,54.7,47.3,42.1,50.5,54.5,58.8,58.6,59.2,61.1,54.7,62.3,61.2,55.6,48.6,46.2,54.3,55.4,54.9,53.6,51.1,53.9,46,49.2,44.5,42.8,38.4,42,43.1,46.7,49.9,48.2,48.5,47.5,40,47.3,42.3,40,34.6,39.8,30.4,20.1,31.7,43.1],"mode":"lines","text":["Mes:  2016-01-01 <br>UCI: 52.2 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2016-02-01 <br>UCI: 51.1 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2016-03-01 <br>UCI: 53.1 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2016-04-01 <br>UCI: 53.2 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2016-05-01 <br>UCI: 56 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2016-06-01 <br>UCI: 54.8 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2016-07-01 <br>UCI: 51.1 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2016-08-01 <br>UCI: 51.2 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2016-09-01 <br>UCI: 51.9 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2016-10-01 <br>UCI: 55.7 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2016-11-01 <br>UCI: 57.2 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2016-12-01 <br>UCI: 54.7 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2017-01-01 <br>UCI: 47.3 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2017-02-01 <br>UCI: 42.1 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2017-03-01 <br>UCI: 50.5 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2017-04-01 <br>UCI: 54.5 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2017-05-01 <br>UCI: 58.8 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2017-06-01 <br>UCI: 58.6 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2017-07-01 <br>UCI: 59.2 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2017-08-01 <br>UCI: 61.1 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2017-09-01 <br>UCI: 54.7 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2017-10-01 <br>UCI: 62.3 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2017-11-01 <br>UCI: 61.2 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2017-12-01 <br>UCI: 55.6 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2018-01-01 <br>UCI: 48.6 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2018-02-01 <br>UCI: 46.2 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2018-03-01 <br>UCI: 54.3 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2018-04-01 <br>UCI: 55.4 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2018-05-01 <br>UCI: 54.9 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2018-06-01 <br>UCI: 53.6 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2018-07-01 <br>UCI: 51.1 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2018-08-01 <br>UCI: 53.9 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2018-09-01 <br>UCI: 46 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2018-10-01 <br>UCI: 49.2 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2018-11-01 <br>UCI: 44.5 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2018-12-01 <br>UCI: 42.8 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2019-01-01 <br>UCI: 38.4 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2019-02-01 <br>UCI: 42 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2019-03-01 <br>UCI: 43.1 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2019-04-01 <br>UCI: 46.7 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2019-05-01 <br>UCI: 49.9 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2019-06-01 <br>UCI: 48.2 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2019-07-01 <br>UCI: 48.5 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2019-08-01 <br>UCI: 47.5 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2019-09-01 <br>UCI: 40 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2019-10-01 <br>UCI: 47.3 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2019-11-01 <br>UCI: 42.3 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2019-12-01 <br>UCI: 40 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2020-01-01 <br>UCI: 34.6 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2020-02-01 <br>UCI: 39.8 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2020-03-01 <br>UCI: 30.4 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2020-04-01 <br>UCI: 20.1 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2020-05-01 <br>UCI: 31.7 <br>Sector: Metalmecánica excluida industria automotriz","Mes:  2020-06-01 <br>UCI: 43.1 <br>Sector: Metalmecánica excluida industria automotriz"],"name":"M","type":"scatter","marker":{"color":"rgba(179,179,179,1)","line":{"color":"rgba(179,179,179,1)"}},"textfont":{"color":"rgba(179,179,179,1)"},"error_y":{"color":"rgba(179,179,179,1)"},"error_x":{"color":"rgba(179,179,179,1)"},"line":{"color":"rgba(179,179,179,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+cod
+</th>
+<th style="text-align:left;">
+sector
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Nivel general
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+Productos alimenticios y bebidas
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+Productos del tabaco
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:left;">
+Productos textiles
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E
+</td>
+<td style="text-align:left;">
+Papel y cartón
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+Edición e impresión
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+Refinación del petróleo
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H
+</td>
+<td style="text-align:left;">
+Sustancias y productos químicos
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+Productos de caucho y plástico
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+J
+</td>
+<td style="text-align:left;">
+Productos minerales no metálicos
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+K
+</td>
+<td style="text-align:left;">
+Industrias metálicas básicas
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+Industria automotriz
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+Metalmecánica excluida industria automotriz
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
